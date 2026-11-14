@@ -59,6 +59,11 @@ router.post('/logout', (req, res) => {
   });
 });
 
+// ログイン中のユーザーを返すAPIエンドポイント（画面リロード時のセッション確認用）
+router.get('/me', requireLogin, (req, res) => {
+  res.json({ success: true, username: req.session.username });
+});
+
 // ブックマークを取得するAPIエンドポイント
 router.get('/bookmarks', requireLogin, async (req, res) => {
   const bookmarks = await getBookmarks(req.session.username);
