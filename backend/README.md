@@ -31,6 +31,16 @@ npm start
 
 `http://localhost:3000` で起動します。初回起動時に `db.sqlite` が作成され、開発用ユーザーが登録されます。
 
+> **frontend と一緒に開発する場合の注意**
+> frontend の開発サーバーも 3000 番を使うため、既定ポートのままだと衝突します。
+> frontend の `package.json` の `"proxy": "http://localhost:3001"` に合わせ、backend は **3001 番**で起動してください。
+>
+> ```bash
+> PORT=3001 npm start
+> ```
+>
+> frontend の起動方法は [frontend/README.md](../frontend/README.md) を参照してください。
+
 ### 環境変数
 
 | 変数 | 既定値 | 説明 |
