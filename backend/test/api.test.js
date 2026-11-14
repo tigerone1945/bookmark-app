@@ -58,6 +58,13 @@ describe('認証が必要なエンドポイント', () => {
     await request(app).delete('/api/bookmarks/1').expect(401);
   });
 
+  test('GET /api/me はログイン中のみユーザー名を返す', async () => {
+    await request(app).get('/api/me').expect(401);
+    const agent = await loginAs('user1', 'password1');
+    const res = await agent.get('/api/me').expect(200);
+    assert.equal(res.body.username, 'user1');
+  });
+
   test('ログアウト後は401に戻る', async () => {
     const agent = await loginAs('user1', 'password1');
     await agent.get('/api/bookmarks').expect(200);
