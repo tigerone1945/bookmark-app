@@ -43,9 +43,18 @@ frontend の `/api` へのリクエストは `frontend/package.json` の `"proxy
 
 ## テスト
 
+backend の API テスト（node:test + supertest）:
+
 ```bash
-cd backend && npm test                                    # API テスト（node:test + supertest）
-cd frontend && CI=true npm test -- --watchAll=false       # 画面テスト（backend の起動は不要）
+cd backend
+npm test
+```
+
+frontend の画面テスト（backend の起動は不要）:
+
+```bash
+cd frontend
+CI=true npm test -- --watchAll=false
 ```
 
 ## 構成
