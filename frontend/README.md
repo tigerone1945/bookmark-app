@@ -1,4 +1,48 @@
-# Getting Started with Create React App
+# Bookmark App - Frontend
+
+ブックマーク管理アプリの画面（React 19 + Create React App）です。
+ログイン、ブックマークの一覧表示・追加・削除、ログアウトができます。API は [backend](../backend/README.md) を利用します。
+
+## 起動方法（開発）
+
+前提: Node.js v22.23.1（動作確認済みのバージョン）。backend と frontend の 2 つを別ターミナルで起動します。
+
+```bash
+# ターミナル1: backend（frontend の proxy 設定に合わせて 3001 番で起動）
+cd backend
+npm install
+PORT=3001 npm start
+
+# ターミナル2: frontend
+cd frontend
+npm install
+npm start
+```
+
+ブラウザで [http://localhost:3000](http://localhost:3000) を開き、開発用ユーザー（例: `user1` / `password1`）でログインしてください。
+
+- `/api` へのリクエストは、`package.json` の `"proxy": "http://localhost:3001"` により backend に転送されます。backend のポートを変える場合は、この値も合わせて変更してください。
+- backend の既定ポートは 3000 で frontend と衝突するため、必ず `PORT=3001` を指定してください。
+
+## ファイル構成
+
+| パス | 役割 |
+|------|------|
+| `src/App.js` | ログイン状態の管理（起動時に `/api/me` でセッションを復元） |
+| `src/pages/LoginPage.js`、`HomePage.js` | ログイン画面、ブックマーク一覧画面 |
+| `src/components/` | `LoginForm`、`BookmarkForm`、`BookmarkList`、`BookmarkItem` |
+| `src/App.test.js` | フェイクバックエンドを使った画面テスト |
+
+## テストとビルド
+
+```bash
+CI=true npm test -- --watchAll=false   # 単発実行（backend の起動は不要）
+npm run build                          # 本番ビルド（build/ に出力）
+```
+
+---
+
+以下は Create React App 標準のドキュメントです。
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
